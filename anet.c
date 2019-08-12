@@ -236,6 +236,8 @@ int anetRead(int fd, char *buf, int count)
     int nread, totlen = 0;
     while(totlen != count) {
         nread = read(fd,buf,count-totlen);
+        //这个地方是已经建立了socket连接，通过read来接收服务器发过来的数据
+        //https://blog.csdn.net/daxingshen/article/details/47357891
         if (nread == 0) return totlen;
         if (nread == -1) return -1;
         totlen += nread;
