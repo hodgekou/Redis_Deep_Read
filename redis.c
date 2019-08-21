@@ -200,12 +200,19 @@ typedef struct redisClient {
     redisDb *db;
     int dictid;
     sds querybuf;
+
+    // 参数 个数保存在这里面
     robj **argv;
     int argc;
     int bulklen;            /* bulk read len. -1 if not in bulk read mode */
+    
+    // 输出缓冲区，执行命令得到的回复都被保存在客户端状态的输出缓冲区
+    // 可变大小缓冲区，如果提供的固定长度不够用
     list *reply;
     int sentlen;
     time_t lastinteraction; /* time of the last interaction, used for timeout */
+    
+    // 标志位
     int flags;              /* REDIS_CLOSE | REDIS_SLAVE | REDIS_MONITOR */
     int slaveseldb;         /* slave selected db, if this client is a slave */
     int authenticated;      /* when requirepass is non-NULL */
