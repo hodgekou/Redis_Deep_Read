@@ -204,6 +204,8 @@ typedef struct redisClient {
     // 参数 个数保存在这里面
     robj **argv;
     int argc;
+
+    // 命令内容长度
     int bulklen;            /* bulk read len. -1 if not in bulk read mode */
     
     // 输出缓冲区，执行命令得到的回复都被保存在客户端状态的输出缓冲区
